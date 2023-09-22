@@ -53,7 +53,7 @@ class TestProducts:
         #  которые ожидают ошибку ValueError при попытке купить больше, чем есть в наличии
         more_quantity = list_of_products['book'].quantity + 1
         with pytest.raises(ValueError):
-            assert list_of_products['book'].buy(more_quantity) == ValueError
+            list_of_products['book'].buy(more_quantity)
 
 
 class TestCart:
