@@ -122,3 +122,25 @@ class TestCart:
         cart.add_product(list_of_products['other_book'], 10)
 
         assert cart.get_total_price() == 35
+
+    def test_buy_book(self, cart, list_of_products):
+        cart.add_product(list_of_products['book'], 10)
+
+        cart.buy()
+        assert cart.products == {}
+        assert list_of_products['book'].quantity == 990
+
+    def test_buy_new_book(self, cart, list_of_products):
+        cart.add_product(list_of_products['new_book'])
+
+        cart.buy()
+        assert cart.products == {}
+        assert list_of_products['new_book'].quantity == 29
+
+
+    def test_buy_with_error(self, cart, list_of_products):
+        cart.add_product(list_of_products['book'], 1010)
+
+        with pytest.raises(ValueError):
+            cart.buy()
+        assert not list_of_products['book'].quantity == 1010
