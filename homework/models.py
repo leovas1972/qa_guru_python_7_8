@@ -89,10 +89,6 @@ class Cart:
         if len(self.products) == 0:
             raise 'Корзина пуста'
 
-        for product in self.products:
-            to_buy = self.products[product]
-            if product.check_quantity(to_buy):
-                continue
-            else:
-                raise ValueError
+        for product, quantity in self.products.items():
+            product.buy(quantity)
         self.clear()
